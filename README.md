@@ -21,6 +21,9 @@ Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter 
    cd poliklinik_webdev
    ```
 
+2. **Sesuaikan Database**
+    - Buat database dengan nama `bk_poliklinik_2024` dan import file `bk_poliklinik_2024.sql` ke database tersebut
+
 2. **Jalankan Server Lokal**
    ```bash
    php artisan serve
