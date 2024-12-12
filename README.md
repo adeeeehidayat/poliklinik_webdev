@@ -26,3 +26,18 @@ Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter 
    php artisan serve
    ```
    Aplikasi akan tersedia di [http://localhost:8000](http://localhost:8000).
+
+### Endpoint
+**Admin**
+1. ```/admin/login``` : halaman login admin
+2. ```/admin/dashboard``` : halaman dashboard admin
+
+**Pasien**
+1. ```/pasien/login``` : halaman login pasien
+2. ```/pasien/register``` : halaman register pasien
+3. ```/pasien/dashboard``` : halaman dashboard pasien
+
+**Dokter**
+1. ```/dokter/login``` : halaman login dokter
+2. ```/dokter/register``` : halaman register dokter
+3. ```/dokter/dashboard``` : halaman dashboard dokter
