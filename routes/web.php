@@ -1,0 +1,72 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\PasienController;
+use App\Http\Controllers\Admin\PoliController;
+use App\Http\Controllers\Admin\ObatController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Dokter\DokterDashboardController;
+use App\Http\Controllers\Pasien\PasienDashboardController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route untuk login admin
+Route::get('/admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login.form');
+Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.adminLogin');
+
+// Route grup untuk admin (butuh autentikasi)
+Route::middleware(['admin.auth'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Route untuk CRUD Dokter
+    Route::resource('/admin/dokter', DokterController::class)->except(['show']); // Menangani CRUD Dokter (create, store, edit, update, destroy)
+
+    // Route untuk CRUD Pasien
+    Route::resource('/admin/pasien', PasienController::class)->except(['show']); // Menangani CRUD Pasien (create, store, edit, update, destroy)
+
+    // Route untuk CRUD Poli
+    Route::resource('/admin/poli', PoliController::class)->except(['show']); // Menangani CRUD Poli (create, store, edit, update, destroy)
+
+    // Route untuk CRUD Obat
+    Route::resource('/admin/obat', ObatController::class)->except(['show']); // Menangani CRUD Obat (create, store, edit, update, destroy)
+
+    Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.adminLogout');
+});
+
+// Route untuk login pasien
+Route::get('/pasien/login', [AuthController::class, 'showPasienLogin'])->name('pasien.login.form');
+Route::post('/pasien/login', [AuthController::class, 'pasienLogin'])->name('pasien.pasienLogin');
+Route::get('/pasien/register', [AuthController::class, 'showPasienRegister'])->name('pasien.register.form');
+Route::post('/pasien/register', [AuthController::class, 'pasienRegister'])->name('pasien.pasienRegister');
+
+// Route grup untuk pasien (butuh autentikasi)
+Route::middleware(['pasien.auth'])->group(function () {
+    Route::get('/pasien/dashboard', [PasienDashboardController::class, 'dashboard'])->name('pasien.dashboard');
+
+    Route::post('/pasien/logout', [AuthController::class, 'pasienLogout'])->name('pasien.pasienLogout');
+});
+
+// Route untuk login dokter
+Route::get('/dokter/login', [AuthController::class, 'showDokterLogin'])->name('dokter.login.form');
+Route::post('/dokter/login', [AuthController::class, 'dokterLogin'])->name('dokter.dokterLogin');
+
+// Route grup untuk dokter (butuh autentikasi)
+Route::middleware(['dokter.auth'])->group(function () {
+    Route::get('/dokter/dashboard', [DokterDashboardController::class, 'dashboard'])->name('dokter.dashboard');
+
+    Route::post('/dokter/logout', [AuthController::class, 'dokterLogout'])->name('dokter.dokterLogout');
+});
