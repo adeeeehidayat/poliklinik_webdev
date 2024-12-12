@@ -10,8 +10,8 @@ Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter 
 
 ### Prasyarat
 - PHP >= 8.0
-- Composer
-- MySQL
+- XAMPP
+- VSCode
 
 ### Langkah-Langkah
 
