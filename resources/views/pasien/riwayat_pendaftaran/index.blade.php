@@ -49,4 +49,32 @@
         </div>
     </div>
 </div>
+
+@if (session('success'))
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Berhasil!</h5>
+                </div>
+                <div class="modal-body">
+                    <i class="fas fa-check-circle text-success"></i> {{ session('success') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.href='{{ route('riwayat_pendaftaran.index') }}'">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
+<script>
+    // Menampilkan modal sukses setelah halaman selesai dimuat
+    window.addEventListener('DOMContentLoaded', (event) => {
+        if (document.getElementById('successModal')) {
+            var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+            myModal.show();
+        }
+    });
+</script>
 @endsection

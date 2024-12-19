@@ -39,6 +39,8 @@ Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter 
 1. ```/pasien/login``` : halaman login pasien
 2. ```/pasien/register``` : halaman register pasien
 3. ```/pasien/dashboard``` : halaman dashboard pasien
+4. ```/pasien/daftar_poli``` : halaman pasien mendaftar poli
+5. ```/pasien/riwayat_pendaftaran``` : halaman riwayat pendaftaran poli pasien
 
 **Dokter**
 1. ```/dokter/login``` : halaman login dokter

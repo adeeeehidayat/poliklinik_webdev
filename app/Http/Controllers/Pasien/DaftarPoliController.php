@@ -52,7 +52,7 @@ class DaftarPoliController extends Controller
             'no_antrian' => $no_antrian,
         ]);
 
-        return redirect()->route('pasien.dashboard')->with('success', 'Pendaftaran poli berhasil.');
+        return redirect()->route('riwayat_pendaftaran.index')->with('success', 'Pendaftaran poli berhasil.');
     }
 
     // Endpoint untuk mendapatkan jadwal dokter berdasarkan poli
