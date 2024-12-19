@@ -7,8 +7,14 @@ use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Admin\ObatController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Dokter\DokterDashboardController;
+
 use App\Http\Controllers\Pasien\PasienDashboardController;
+
+
+// Dokter
+use App\Http\Controllers\Dokter\DokterDashboardController;
+use App\Http\Controllers\Dokter\JadwalPeriksaController;
+use App\Http\Controllers\Dokter\ProfilDokterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,5 +74,10 @@ Route::post('/dokter/login', [AuthController::class, 'dokterLogin'])->name('dokt
 Route::middleware(['dokter.auth'])->group(function () {
     Route::get('/dokter/dashboard', [DokterDashboardController::class, 'dashboard'])->name('dokter.dashboard');
 
+    Route::get('/dokter/profil', [ProfilDokterController::class, 'index'])->name('profil_dokter.index');
+    Route::get('/dokter/profil/edit', [ProfilDokterController::class, 'edit'])->name('profil_dokter.edit');
+    Route::post('/dokter/profil/update', [ProfilDokterController::class, 'update'])->name('profil_dokter.update');
+
+    Route::resource('/dokter/jadwal_periksa', JadwalPeriksaController::class)->except(['show']);
     Route::post('/dokter/logout', [AuthController::class, 'dokterLogout'])->name('dokter.dokterLogout');
 });

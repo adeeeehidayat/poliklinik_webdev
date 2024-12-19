@@ -36,7 +36,8 @@ class DokterController extends Controller
         ]);
 
         Dokter::create($request->all());  // Simpan data dokter
-        return redirect()->route('dokter.index')->with('success', 'Dokter berhasil ditambahkan');
+
+        return redirect()->route('dokter.index')->with('success', 'Dokter baru berhasil ditambahkan!');
     }
 
     // Menampilkan form untuk mengedit data dokter
@@ -59,7 +60,8 @@ class DokterController extends Controller
         ]);
 
         $dokter->update($request->all());  // Perbarui data dokter
-        return redirect()->route('dokter.index')->with('success', 'Dokter berhasil diperbarui');
+        
+        return redirect()->route('dokter.index')->with('success', 'Data dokter berhasil di edit!');
     }
 
     // Menghapus dokter

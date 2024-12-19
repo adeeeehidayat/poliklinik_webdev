@@ -31,9 +31,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-injured"></i></div>
                                 Daftar Pasien
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ Request::routeIs('jadwal_periksa.index') ? 'active' : '' }}" href="{{ route('jadwal_periksa.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-days"></i></div>
                                 Jadwal Periksa
+                            </a>
+                            <a class="nav-link {{ Request::routeIs('profil_dokter.index') ? 'active' : '' }}" href="{{ route('profil_dokter.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-md"></i></div>
+                                Profile
                             </a>
                             <div class="sb-sidenav-footer">
                                 <form method="POST" action="{{ route('dokter.dokterLogout') }}">
