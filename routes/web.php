@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Admin\ObatController;
 use App\Http\Controllers\Admin\DashboardController;
 
+// Pasien
 use App\Http\Controllers\Pasien\PasienDashboardController;
-
+use App\Http\Controllers\Pasien\DaftarPoliController;
+use App\Http\Controllers\Pasien\RiwayatPendaftaranController;
 
 // Dokter
 use App\Http\Controllers\Dokter\DokterDashboardController;
@@ -62,6 +64,16 @@ Route::post('/pasien/register', [AuthController::class, 'pasienRegister'])->name
 // Route grup untuk pasien (butuh autentikasi)
 Route::middleware(['pasien.auth'])->group(function () {
     Route::get('/pasien/dashboard', [PasienDashboardController::class, 'dashboard'])->name('pasien.dashboard');
+
+    // Rute untuk menampilkan form pendaftaran poli
+    Route::get('/pasien/daftar-poli', [DaftarPoliController::class, 'index'])->name('daftar_poli.index');
+    Route::get('/get-jadwal-dokter/{poliId}', [DaftarPoliController::class, 'getJadwalDokter']);
+
+    // Rute untuk menampilkan riwayat pendaftaran pasien
+    Route::get('/pasien/riwayat-pendaftaran', [RiwayatPendaftaranController::class, 'index'])->name('riwayat_pendaftaran.index');
+
+    // Rute untuk menyimpan pendaftaran poli
+    Route::post('/pasien/daftar-poli', [DaftarPoliController::class, 'store'])->name('daftar_poli.store');
 
     Route::post('/pasien/logout', [AuthController::class, 'pasienLogout'])->name('pasien.pasienLogout');
 });

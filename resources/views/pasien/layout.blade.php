@@ -27,11 +27,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('daftar_poli.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-hospital"></i></div>
                                 Daftar Poliklinik
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('riwayat_pendaftaran.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clock-rotate-left"></i></div>
                                 Riwayat Pendaftaran
                             </a>

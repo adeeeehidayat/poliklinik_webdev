@@ -8,7 +8,7 @@ use App\Models\JadwalPeriksa;
 
 class JadwalPeriksaController extends Controller
 {
-        /**
+    /**
      * Menampilkan daftar jadwal periksa dokter yang sedang login.
      */
     public function index()
