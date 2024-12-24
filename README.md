@@ -1,6 +1,6 @@
 # Poliklinik Web Development
 
-Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter yang dibangun menggunakan framework Laravel. Sistem ini memiliki tiga jenis pengguna utama:
+Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter yang dibangun menggunakan framework Laravel versi 10. Sistem ini memiliki tiga jenis pengguna utama:
 
 1. **Admin**: Mengelola data pengguna, dokter, pasien, poli dan obat.
 2. **Dokter**: Melihat jadwal janji temu mereka dan memberikan catatan medis.
@@ -10,7 +10,7 @@ Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter 
 
 ### Prasyarat
 - PHP >= 8.0
-- XAMPP
+- XAMPP atau Laragon
 - VSCode
 
 ### Langkah-Langkah
