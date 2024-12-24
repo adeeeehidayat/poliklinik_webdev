@@ -6,11 +6,15 @@
     <title>Dokter Login</title>
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #007bff, #28a745);
+            background-color: #edf0f2;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Roboto', sans-serif;
@@ -47,10 +51,43 @@
         .text-danger {
             font-size: 0.9rem;
         }
+        .text-center a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #1153a1;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 28px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .navbar-brand:hover {
+            color: #ffc600;
+        }
+        .navbar img {
+            height: 40px; /* Atur tinggi gambar sesuai kebutuhan */
+            margin-right: 10px; /* Jarak antara gambar dan teks */
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <img src="{{ asset('assets/img/logo_dinus.png') }}" alt="Logo" /> <!-- Ganti dengan path gambar logo -->
+            <a class="navbar-brand mx-auto" href="#">POLIKLINIK UDINUS</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-4"> <!-- Tambahkan margin top untuk menghindari navbar -->
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card login-card">
@@ -79,13 +116,19 @@
                             <div class="mb-3">
                                 <div class="input-group">
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                    <span class="input-group-text" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                                    <span class="input-group-text" onclick=" togglePasswordVisibility()" style="cursor: pointer;">
                                         <i id="toggle-icon" class="fas fa-eye"></i>
                                     </span>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
+                        <div class="text-center mt-3">
+                            <p>Login sebagai Pasien <a href="/pasien/login">Klik di sini</a></p>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p>Kembali ke <a href="/">Dashboard Utama</a></p>
+                        </div>
                     </div>
                 </div>
             </div>

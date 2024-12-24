@@ -6,11 +6,15 @@
     <title>Pasien Register</title>
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #007bff, #28a745);
+            background-color: #edf0f2;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Roboto', sans-serif;
@@ -55,10 +59,35 @@
         .text-center a:hover {
             text-decoration: underline;
         }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #1153a1;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 28px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .navbar-brand:hover {
+            color: #ffc600;
+        }
+        .navbar img {
+            height: 40px; /* Atur tinggi gambar sesuai kebutuhan */
+            margin-right: 10px; /* Jarak antara gambar dan teks */
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <img src="{{ asset('assets/img/logo_dinus.png') }}" alt="Logo" /> <!-- Ganti dengan path gambar logo -->
+            <a class="navbar-brand mx-auto" href="#">POLIKLINIK UDINUS</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5 mb-5"> <!-- Tambahkan margin top untuk menghindari navbar -->
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card login-card">

@@ -11,15 +11,31 @@
         @method('PUT')
         <div class="mb-3">
             <label for="hari">Hari</label>
-            <input type="text" name="hari" class="form-control" id="hari" value="{{ old('hari', $jadwalPeriksa->hari) }}">
+            <select name="hari" class="form-control" id="hari">
+                <option value="">Pilih Hari</option>
+                <option value="Senin" {{ $jadwalPeriksa->hari === 'Senin' ? 'selected' : '' }}>Senin</option>
+                <option value="Selasa" {{ $jadwalPeriksa->hari === 'Selasa' ? 'selected' : '' }}>Selasa</option>
+                <option value="Rabu" {{ $jadwalPeriksa->hari === 'Rabu' ? 'selected' : '' }}>Rabu</option>
+                <option value="Kamis" {{ $jadwalPeriksa->hari === 'Kamis' ? 'selected' : '' }}>Kamis</option>
+                <option value="Jumat" {{ $jadwalPeriksa->hari === 'Jumat' ? 'selected' : '' }}>Jumat</option>
+                <option value="Sabtu" {{ $jadwalPeriksa->hari === 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
+                <option value="Minggu" {{ $jadwalPeriksa->hari === 'Minggu' ? 'selected' : '' }}>Minggu</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="jam_mulai">Jam Mulai</label>
-            <input type="time" name="jam_mulai" class="form-control" id="jam_mulai" value="{{ old('jam_mulai', $jadwalPeriksa->jam_mulai) }}">
+            <input type="time" name="jam_mulai" class="form-control" id="jam_mulai" value="{{ $jadwalPeriksa->jam_mulai }}">
         </div>
         <div class="mb-3">
             <label for="jam_selesai">Jam Selesai</label>
-            <input type="time" name="jam_selesai" class="form-control" id="jam_selesai" value="{{ old('jam_selesai', $jadwalPeriksa->jam_selesai) }}">
+            <input type="time" name="jam_selesai" class="form-control" id="jam_selesai" value="{{ $jadwalPeriksa->jam_selesai }}">
+        </div>
+        <div class="mb-3">
+            <label for="status">Status</label>
+            <select name="status" class="form-control" id="status">
+                <option value="Y" {{ $jadwalPeriksa->status === 'Y' ? 'selected' : '' }}>Aktif</option>
+                <option value="N" {{ $jadwalPeriksa->status === 'N' ? 'selected' : '' }}>Tidak Aktif</option>
+            </select>
         </div>
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary">Perbarui</button>

@@ -50,6 +50,7 @@ class DaftarPoliController extends Controller
             'id_jadwal' => $request->id_jadwal,
             'keluhan' => $request->keluhan,
             'no_antrian' => $no_antrian,
+            'status_periksa' => 0, // Set nilai default untuk status_periksa
         ]);
 
         return redirect()->route('riwayat_pendaftaran.index')->with('success', 'Pendaftaran poli berhasil.');
@@ -58,11 +59,15 @@ class DaftarPoliController extends Controller
     // Endpoint untuk mendapatkan jadwal dokter berdasarkan poli
     public function getJadwalDokter($poliId)
     {
-        // Ambil jadwal dokter berdasarkan poli yang dipilih dan sertakan nama dokter
-        $jadwals = JadwalPeriksa::whereHas('dokter', function($query) use ($poliId) {
+        // Ambil jadwal dokter berdasarkan poli yang dipilih dengan status aktif (Y) dan sertakan nama dokter
+        $jadwals = JadwalPeriksa::whereHas('dokter', function ($query) use ($poliId) {
             $query->where('id_poli', $poliId);
-        })->with('dokter')->get();  // Dengan this, kita load relasi dokter
+        })
+        ->where('status', 'Y') // Tambahkan kondisi status aktif
+        ->with('dokter') // Sertakan relasi dokter
+        ->get();
 
         return response()->json($jadwals);
     }
+
 }

@@ -11,7 +11,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-light bg-light" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="{{ route('admin.dashboard') }}">Admin</a>
             <!-- Sidebar Toggle-->
@@ -19,7 +19,7 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menu</div>

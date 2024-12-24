@@ -1,7 +1,7 @@
 @extends('pasien.layout')
 
 @section('content')
-<div class="container my-4">
+<div class="container-fluid px-5 mt-4">
     <div class="card shadow-sm">
         <div class="card-header">
             <h4>Pendaftaran Poliklinik</h4>

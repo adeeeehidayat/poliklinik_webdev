@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
+// Admin
 use App\Http\Controllers\Admin\DokterController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Admin\PoliController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\Pasien\RiwayatPendaftaranController;
 
 // Dokter
 use App\Http\Controllers\Dokter\DokterDashboardController;
+use App\Http\Controllers\Dokter\DaftarPasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
 use App\Http\Controllers\Dokter\ProfilDokterController;
 /*
@@ -89,6 +92,13 @@ Route::middleware(['dokter.auth'])->group(function () {
     Route::get('/dokter/profil', [ProfilDokterController::class, 'index'])->name('profil_dokter.index');
     Route::get('/dokter/profil/edit', [ProfilDokterController::class, 'edit'])->name('profil_dokter.edit');
     Route::post('/dokter/profil/update', [ProfilDokterController::class, 'update'])->name('profil_dokter.update');
+
+    Route::get('/dokter/daftar_pasien', [DaftarPasienController::class, 'index'])->name('daftar_pasien.index');
+    Route::get('/dokter/daftar_pasien/edit/{id}', [DaftarPasienController::class, 'edit'])->name('daftar_pasien.edit');
+    Route::post('/dokter/daftar_pasien/{id}/simpan', [DaftarPasienController::class, 'simpan'])->name('daftar_pasien.simpan');
+
+    Route::get('/daftar_pasien/{id}/edit_sudah_diperiksa', [DaftarPasienController::class, 'editSudahDiperiksa'])->name('daftar_pasien.editSudahDiperiksa');
+    Route::post('/daftar_pasien/{id}/update_sudah_diperiksa', [DaftarPasienController::class, 'updateSudahDiperiksa'])->name('daftar_pasien.updateSudahDiperiksa');
 
     Route::resource('/dokter/jadwal_periksa', JadwalPeriksaController::class)->except(['show']);
     Route::post('/dokter/logout', [AuthController::class, 'dokterLogout'])->name('dokter.dokterLogout');

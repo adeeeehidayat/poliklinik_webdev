@@ -4,13 +4,22 @@
 <div class="container-fluid px-4">
     <h1 class="mt-4">Tambah Jadwal Periksa</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Obat</li>
+        <li class="breadcrumb-item active">Jadwal Periksa</li>
     </ol>
     <form action="{{ route('jadwal_periksa.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="hari">Hari</label>
-            <input type="text" name="hari" class="form-control" id="hari" value="{{ old('hari') }}">
+            <select name="hari" class="form-control" id="hari">
+                <option value="">Pilih Hari</option>
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+                <option value="Jumat">Jumat</option>
+                <option value="Sabtu">Sabtu</option>
+                <option value="Minggu">Minggu</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="jam_mulai">Jam Mulai</label>
