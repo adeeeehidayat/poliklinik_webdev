@@ -34,4 +34,10 @@ class DaftarPoli extends Model
     {
         return $this->belongsTo(Pasien::class, 'id_pasien');
     }
+
+    // Relasi dengan model Periksa
+    public function periksa()
+    {
+        return $this->hasOne(Periksa::class, 'id_daftar_poli');
+    }
 }

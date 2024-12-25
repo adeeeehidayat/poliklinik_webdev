@@ -17,4 +17,16 @@ class DetailPeriksa extends Model
     ];
 
     public $timestamps = false;
+
+    // Relasi dengan model Obat
+    public function obat()
+    {
+        return $this->belongsTo(Obat::class, 'id_obat');
+    }
+
+    // Relasi dengan model Periksa
+    public function periksa()
+    {
+        return $this->belongsTo(Periksa::class, 'id_periksa');
+    }
 }

@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <!-- Poli -->
+            <!-- Poli 
             <div class="row mb-3">
                 <div class="col-md-3">
                     <label for="id_poli" class="form-label">Poli</label>
@@ -82,7 +82,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Button Update and Cancel -->
             <div class="d-flex justify-content-end">

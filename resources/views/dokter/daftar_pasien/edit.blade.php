@@ -13,12 +13,6 @@
                     <input type="text" class="form-control" id="nama_pasien" value="{{ $pendaftaran->pasien->nama }}" disabled>
                 </div>
 
-                <!-- Keluhan Pasien (Tidak Bisa Diedit) -->
-                <div class="mb-3">
-                    <label for="keluhan" class="form-label">Keluhan</label>
-                    <input type="text" class="form-control" id="keluhan" value="{{ $pendaftaran->keluhan }}" disabled>
-                </div>
-
                 <!-- Input Tanggal Periksa -->
                 <div class="mb-3">
                     <label for="tanggal_periksa" class="form-label">Tanggal Periksa</label>

@@ -35,7 +35,7 @@ class ProfilDokterController extends Controller
             'alamat' => 'required|string|max:255',
             'no_hp' => 'required|integer',
             'password' => 'required|string|max:100',
-            'id_poli' => 'required|exists:poli,id',
+            // 'id_poli' => 'required|exists:poli,id',
         ]);
 
         // Ambil data dokter dari sesi
@@ -48,7 +48,7 @@ class ProfilDokterController extends Controller
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
             'password' => $request->password,
-            'id_poli' => $request->id_poli,
+            // 'id_poli' => $request->id_poli,
         ]);
 
         // Ambil data dokter yang terbaru dari database

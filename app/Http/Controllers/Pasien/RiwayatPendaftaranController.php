@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pasien;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DaftarPoli;
+use App\Models\Periksa;
 
 class RiwayatPendaftaranController extends Controller
 {
@@ -20,6 +21,24 @@ class RiwayatPendaftaranController extends Controller
 
         // Kirim data ke view
         return view('pasien.riwayat_pendaftaran.index', compact('riwayatPendaftaran'));
+    }
+
+    public function detailPeriksa($id)
+    {
+        // Ambil data pendaftaran berdasarkan ID
+        $pendaftaran = DaftarPoli::findOrFail($id);
+
+        // Ambil data pemeriksaan jika sudah diperiksa
+        $periksa = Periksa::where('id_daftar_poli', $id)->first();
+
+        // Cek status pemeriksaan
+        if ($pendaftaran->status_periksa == 0) {
+            // Jika belum diperiksa, hanya tampilkan informasi dasar
+            return view('pasien.riwayat_pendaftaran.detail_periksa', compact('pendaftaran'));
+        } else {
+            // Jika sudah diperiksa, tampilkan informasi lengkap
+            return view('pasien.riwayat_pendaftaran.detail_periksa', compact('pendaftaran', 'periksa'));
+        }
     }
 }
 

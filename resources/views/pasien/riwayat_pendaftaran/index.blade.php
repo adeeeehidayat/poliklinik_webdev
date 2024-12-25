@@ -20,8 +20,8 @@
                                 <th>Hari</th>
                                 <th>Jam Mulai</th>
                                 <th>Jam Selesai</th>
-                                <th>Keluhan</th>
                                 <th>Antrian</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -34,10 +34,20 @@
                                     <td>{{ $pendaftaran->jadwal->hari }}</td>
                                     <td>{{ $pendaftaran->jadwal->jam_mulai }}</td>
                                     <td>{{ $pendaftaran->jadwal->jam_selesai }}</td>
-                                    <td>{{ $pendaftaran->keluhan }}</td>
                                     <td>{{ $pendaftaran->no_antrian }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-info btn-sm">Detail</a>
+                                        @if ($pendaftaran->status_periksa == 0)
+                                            <span class="badge bg-danger">Belum Diperiksa</span>
+                                        @elseif ($pendaftaran->status_periksa == 1)
+                                            <span class="badge bg-success">Sudah Diperiksa</span>
+                                            <!-- Menambahkan tanggal pemeriksaan jika sudah diperiksa -->
+                                            <p class="mt-2"><small><strong>{{ $pendaftaran->periksa->tgl_periksa ?? 'Tanggal tidak tersedia' }}</strong></span></p>
+                                        @else
+                                            <span class="badge bg-secondary">Status Tidak Diketahui</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('riwayat_pendaftaran.detail_periksa', ['id' => $pendaftaran->id]) }}" class="btn btn-info btn-sm">Detail</a>
                                         <!-- Tindakan lain seperti batal pendaftaran bisa ditambahkan disini -->
                                     </td>
                                 </tr>

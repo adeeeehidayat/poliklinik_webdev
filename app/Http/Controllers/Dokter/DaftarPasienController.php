@@ -91,45 +91,58 @@ class DaftarPasienController extends Controller
         }
     }
 
+    // Method untuk form edit pasien yang sudah diperiksa
     public function editSudahDiperiksa($id)
     {
         // Ambil data pendaftaran berdasarkan ID
         $pendaftaran = DaftarPoli::findOrFail($id);
 
-        // Pastikan pasien sudah diperiksa
-        if ($pendaftaran->status_periksa != 1) {
-            return redirect()->route('daftar_pasien.index')->with('error', 'Pasien belum diperiksa.');
-        }
-
-        // Ambil data pemeriksaan
+        // Ambil data pemeriksaan dan obat yang telah diberikan
         $periksa = Periksa::where('id_daftar_poli', $id)->first();
+        $obat = Obat::all();
 
-        return view('dokter.daftar_pasien.edit_sudah_diperiksa', compact('pendaftaran', 'periksa'));
+        // Tampilkan view edit untuk pasien yang sudah diperiksa
+        return view('dokter.daftar_pasien.edit_sudah_diperiksa', compact('pendaftaran', 'periksa', 'obat'));
     }
 
     public function updateSudahDiperiksa(Request $request, $id)
     {
-        $request->validate([
-            'tanggal_periksa' => 'required|date',
-            'catatan' => 'nullable|string|max:255',
-        ]);
+        DB::beginTransaction();
 
         try {
-            // Ambil data pemeriksaan
-            $periksa = Periksa::where('id_daftar_poli', $id)->firstOrFail();
+            // Ambil data pendaftaran
+            $pendaftaran = DaftarPoli::findOrFail($id);
 
-            $tanggalPeriksa = $request->input('tanggal_periksa');
-            $formattedTanggalPeriksa = date('Y-m-d', strtotime($tanggalPeriksa));
+            // Ambil data pemeriksaan yang sudah ada
+            $periksa = Periksa::where('id_daftar_poli', $id)->first();
 
-            // Update data
+            // Update data pemeriksaan
             $periksa->update([
-                'tgl_periksa' => $formattedTanggalPeriksa,
+                'tgl_periksa' => $request->input('tanggal_periksa'),
                 'catatan' => $request->input('catatan'),
+                'biaya_periksa' => $request->input('biaya_periksa'),
             ]);
 
-            return redirect()->route('daftar_pasien.index')->with('success', 'Data pemeriksaan berhasil diperbarui.');
+            // Hapus detail obat yang sudah ada sebelumnya
+            $periksa->detailPeriksa()->delete();
+
+            // Simpan detail obat baru
+            if ($request->has('obat')) {
+                foreach ($request->input('obat') as $obatId) {
+                    DetailPeriksa::create([
+                        'id_periksa' => $periksa->id,
+                        'id_obat' => $obatId,
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('daftar_pasien.index')->with('success', 'Data pemeriksaan pasien berhasil diperbarui.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data pemeriksaan: ' . $e->getMessage());
         }
     }
+
 }

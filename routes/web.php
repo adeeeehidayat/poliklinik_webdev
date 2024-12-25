@@ -74,6 +74,7 @@ Route::middleware(['pasien.auth'])->group(function () {
 
     // Rute untuk menampilkan riwayat pendaftaran pasien
     Route::get('/pasien/riwayat-pendaftaran', [RiwayatPendaftaranController::class, 'index'])->name('riwayat_pendaftaran.index');
+    Route::get('/pasien/riwayat-pendaftaran/detail-periksa/{id}', [RiwayatPendaftaranController::class, 'detailPeriksa'])->name('riwayat_pendaftaran.detail_periksa');
 
     // Rute untuk menyimpan pendaftaran poli
     Route::post('/pasien/daftar-poli', [DaftarPoliController::class, 'store'])->name('daftar_poli.store');
