@@ -11,65 +11,75 @@
 
     <a href="{{ route('jadwal_periksa.create') }}" class="btn btn-success mb-3">Tambah Jadwal</a>
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>No</th>
-                <th>Nama Dokter</th>
-                <th>Hari</th>
-                <th>Jam Mulai</th>
-                <th>Jam Selesai</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
             @if ($jadwalPeriksa->isNotEmpty())
-                @foreach ($jadwalPeriksa as $index => $jadwal)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $jadwal->dokter->nama ?? 'Tidak Diketahui' }}</td>
-                        <td>{{ $jadwal->hari }}</td>
-                        <td>{{ $jadwal->jam_mulai }}</td>
-                        <td>{{ $jadwal->jam_selesai }}</td>
-                        <td>{{ $jadwal->status === 'Y' ? 'Aktif' : 'Tidak Aktif' }}</td>
-                        <td>
-                            @php
-                                $hariIndonesia = [
-                                    'Monday' => 'Senin',
-                                    'Tuesday' => 'Selasa',
-                                    'Wednesday' => 'Rabu',
-                                    'Thursday' => 'Kamis',
-                                    'Friday' => 'Jumat',
-                                    'Saturday' => 'Sabtu',
-                                    'Sunday' => 'Minggu'
-                                ];
-                                $hariIni = $hariIndonesia[\Carbon\Carbon::now()->format('l')];
-                            @endphp
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Dokter</th>
+                                <th>Hari</th>
+                                <th>Jam Mulai</th>
+                                <th>Jam Selesai</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($jadwalPeriksa as $index => $jadwal)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $jadwal->dokter->nama ?? 'Tidak Diketahui' }}</td>
+                                    <td>{{ $jadwal->hari }}</td>
+                                    <td>{{ $jadwal->jam_mulai }}</td>
+                                    <td>{{ $jadwal->jam_selesai }}</td>
+                                    <td>
+                                        @if ($jadwal->status === 'Y')
+                                            <span class="badge bg-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-secondary">Tidak Aktif</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                            $hariIndonesia = [
+                                                'Monday' => 'Senin',
+                                                'Tuesday' => 'Selasa',
+                                                'Wednesday' => 'Rabu',
+                                                'Thursday' => 'Kamis',
+                                                'Friday' => 'Jumat',
+                                                'Saturday' => 'Sabtu',
+                                                'Sunday' => 'Minggu'
+                                            ];
+                                            $hariIni = $hariIndonesia[\Carbon\Carbon::now()->format('l')];
+                                        @endphp
 
-                            @if ($jadwal->hari === $hariIni)
-                                <button class="btn btn-secondary btn-sm" disabled>Edit</button>
-                            @else
-                                <a href="{{ route('jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            @endif
+                                        @if ($jadwal->hari === $hariIni)
+                                            <button class="btn btn-secondary btn-sm" disabled>Edit</button>
+                                        @else
+                                            <a href="{{ route('jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        @endif
 
-                            <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                                        <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else
-                <tr>
-                    <td colspan="7" class="text-center text-muted">
-                        <i class="fas fa-info-circle"></i> Belum ada data jadwal periksa.
-                    </td>
-                </tr>
+                <p class="text-center text-muted">
+                    <i class="fa fa-info-circle"></i> Belum ada data jadwal periksa.
+                </p>
             @endif
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>
 
 @if (session('success'))

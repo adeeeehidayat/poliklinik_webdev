@@ -2,16 +2,15 @@
 
 @section('content')
 <div class="container-fluid px-5 mt-4">
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <h4>Riwayat Pendaftaran Poli</h4>
-        </div>
+    <h2>Riwayat Pendaftaran Poli</h2>
+    <p>Berikut daftar riwayat pendaftaran pasien <strong>{{ session('pasien')->nama }}</strong> di Poliklinik UDINUS</p>
+    <div class="card shadow-sm mt-4">
         <div class="card-body">
             @if($riwayatPendaftaran->isEmpty())
                 <p class="text-center">Anda belum mendaftar ke poli manapun.</p>
             @else
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>

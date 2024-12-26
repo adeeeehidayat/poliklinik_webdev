@@ -21,38 +21,52 @@
             </table>
         </div>
 
-        <table class="table table-striped table-bordered table-hover">
-            <thead class="thead-light">
-                <tr>
-                    <th>Tanggal Periksa</th>
-                    <th>Catatan</th>
-                    <th>Keluhan</th>
-                    <th>Biaya Periksa</th>
-                    <th>Obat</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($riwayatPeriksa as $item)
-                    <tr>
-                        <td>{{ \Carbon\Carbon::parse($item->tgl_periksa)->format('d F Y') }}</td>
-                        <td>{{ $item->catatan ?? 'Tidak ada catatan' }}</td>
-                        <td>{{ $item->daftarPoli->keluhan ?? 'Tidak ada keluhan' }}</td>
-                        <td>Rp {{ number_format($item->biaya_periksa, 0, ',', '.') }}</td>
-                        <td>
-                            @foreach ($item->detailPeriksa as $detail)
-                                <span class="badge bg-success">{{ $detail->obat->nama_obat }}</span><br>
-                            @endforeach
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                @if ($riwayatPeriksa->isNotEmpty())
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Tanggal Periksa</th>
+                                    <th>Catatan</th>
+                                    <th>Keluhan</th>
+                                    <th>Biaya Periksa</th>
+                                    <th>Obat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($riwayatPeriksa as $item)
+                                    <tr>
+                                        <td>{{ \Carbon\Carbon::parse($item->tgl_periksa)->format('d F Y') }}</td>
+                                        <td>{{ $item->catatan ?? 'Tidak ada catatan' }}</td>
+                                        <td>{{ $item->daftarPoli->keluhan ?? 'Tidak ada keluhan' }}</td>
+                                        <td>Rp {{ number_format($item->biaya_periksa, 0, ',', '.') }}</td>
+                                        <td>
+                                            @foreach ($item->detailPeriksa as $detail)
+                                                <span class="badge bg-success">{{ $detail->obat->nama_obat }}</span><br>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p class="text-center text-muted">
+                        <i class="fa fa-info-circle"></i> Belum ada riwayat pemeriksaan untuk pasien ini.
+                    </p>
+                @endif
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{{ route('riwayat_periksa.index') }}" class="btn btn-secondary btn-lg">Kembali</a>
+        </div>
+
     @else
         <p class="alert alert-warning">Pasien ini belum memiliki riwayat pemeriksaan.</p>
     @endif
 
-    <div class="d-flex justify-content-end">
-        <a href="{{ route('riwayat_periksa.index') }}" class="btn btn-secondary btn-lg">Kembali</a>
-    </div>
 </div>
 @endsection

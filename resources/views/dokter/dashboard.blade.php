@@ -1,9 +1,9 @@
 @extends('dokter.layout')
 
 @section('content')
-<div class="container-fluid px-4">
+<div class="container-fluid px-5 mt-4">
     <h1 class="mt-4">Dashboard Dokter</h1>
-    <p>Selamat datang <strong>{{ session('dokter')->nama }}</strong> di dashboard dokter poliklinik UDINUS.</p>
+    <p class="mb-5">Selamat datang <strong>{{ session('dokter')->nama }}</strong> di dashboard dokter poliklinik UDINUS.</p>
 
     <div class="row">
         <!-- Card untuk jumlah pasien yang sudah diperiksa -->
@@ -14,7 +14,7 @@
                     <i class="fas fa-check-circle fa-3x"></i> <!-- Icon untuk Pasien yang Sudah Diperiksa -->
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">Sudah Diperiksa</a>
+                    <a class="small text-white stretched-link" href="{{ route('daftar_pasien.index') }}">Sudah Diperiksa</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <i class="fas fa-times-circle fa-3x"></i> <!-- Icon untuk Pasien yang Belum Diperiksa -->
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">Belum Diperiksa</a>
+                    <a class="small text-white stretched-link" href="{{ route('daftar_pasien.index') }}">Belum Diperiksa</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <i class="fas fa-calendar-check fa-3x"></i> <!-- Icon untuk Jadwal Periksa -->
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">Jadwal Periksa</a>
+                    <a class="small text-white stretched-link" href="{{ route('jadwal_periksa.index') }}">Jadwal Periksa</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>

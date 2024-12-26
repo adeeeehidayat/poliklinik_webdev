@@ -95,16 +95,24 @@ Route::middleware(['dokter.auth'])->group(function () {
     Route::get('/dokter/profil/edit', [ProfilDokterController::class, 'edit'])->name('profil_dokter.edit');
     Route::post('/dokter/profil/update', [ProfilDokterController::class, 'update'])->name('profil_dokter.update');
 
-    Route::get('/dokter/daftar_pasien', [DaftarPasienController::class, 'index'])->name('daftar_pasien.index');
-    Route::get('/dokter/daftar_pasien/edit/{id}', [DaftarPasienController::class, 'edit'])->name('daftar_pasien.edit');
-    Route::post('/dokter/daftar_pasien/{id}/simpan', [DaftarPasienController::class, 'simpan'])->name('daftar_pasien.simpan');
+    Route::get('/dokter/daftar-pasien', [DaftarPasienController::class, 'index'])->name('daftar_pasien.index');
+    Route::get('/dokter/daftar-pasien/edit/{id}', [DaftarPasienController::class, 'edit'])->name('daftar_pasien.edit');
+    Route::post('/dokter/daftar-pasien/{id}/simpan', [DaftarPasienController::class, 'simpan'])->name('daftar_pasien.simpan');
 
-    Route::get('/dokter/daftar_pasien/{id}/edit_sudah_diperiksa', [DaftarPasienController::class, 'editSudahDiperiksa'])->name('daftar_pasien.editSudahDiperiksa');
-    Route::post('/dokter/daftar_pasien/{id}/update_sudah_diperiksa', [DaftarPasienController::class, 'updateSudahDiperiksa'])->name('daftar_pasien.updateSudahDiperiksa');
+    Route::get('/dokter/daftar-pasien/{id}/edit-sudah-diperiksa', [DaftarPasienController::class, 'editSudahDiperiksa'])->name('daftar_pasien.editSudahDiperiksa');
+    Route::post('/dokter/daftar-pasien/{id}/update-sudah-diperiksa', [DaftarPasienController::class, 'updateSudahDiperiksa'])->name('daftar_pasien.updateSudahDiperiksa');
 
-    Route::get('/dokter/riwayat_periksa', [RiwayatPeriksaController::class, 'index'])->name('riwayat_periksa.index');
-    Route::get('/dokter/riwayat_periksa/{id}', [RiwayatPeriksaController::class, 'detail'])->name('riwayat_periksa.detail');
+    Route::get('/dokter/riwayat-periksa', [RiwayatPeriksaController::class, 'index'])->name('riwayat_periksa.index');
+    Route::get('/dokter/riwayat-periksa/{id}', [RiwayatPeriksaController::class, 'detail'])->name('riwayat_periksa.detail');
 
-    Route::resource('/dokter/jadwal_periksa', JadwalPeriksaController::class)->except(['show']);
+    Route::resource('/jadwal-periksa', JadwalPeriksaController::class)->except(['show'])->names([
+        'index' => 'jadwal_periksa.index',
+        'create' => 'jadwal_periksa.create',
+        'store' => 'jadwal_periksa.store',
+        'edit' => 'jadwal_periksa.edit',
+        'update' => 'jadwal_periksa.update',
+        'destroy' => 'jadwal_periksa.destroy',
+    ]);
+    
     Route::post('/dokter/logout', [AuthController::class, 'dokterLogout'])->name('dokter.dokterLogout');
 });

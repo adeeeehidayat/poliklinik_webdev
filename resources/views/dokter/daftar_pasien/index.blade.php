@@ -3,42 +3,46 @@
 @section('content')
 <div class="container-fluid px-5 mt-4">
     <h1 class="mb-4">Daftar Pasien</h1>
-    <p class="text-muted">Berikut adalah pasien yang terdaftar di <strong>{{ session('dokter')->nama }}</strong></p>
+    <p>Berikut adalah pasien yang terdaftar di <strong>{{ session('dokter')->nama }}</strong></p>
 
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Pasien</th>
-                    <th>Keluhan</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if($daftarPoli->isNotEmpty())
-                    @foreach($daftarPoli as $index => $pendaftaran)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $pendaftaran->pasien->nama }}</td>
-                        <td>{{ $pendaftaran->keluhan }}</td>
-                        <td>
-                            @if($pendaftaran->status_periksa == 0)
-                                <a href="{{ route('daftar_pasien.edit', $pendaftaran->id) }}" class="btn btn-danger">Belum Diperiksa</a>
-                            @else
-                                <a href="{{ route('daftar_pasien.editSudahDiperiksa', $pendaftaran->id) }}" class="btn btn-success">Sudah Diperiksa</a>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                @else
-                    <tr>
-                        <td colspan="4" class="text-center text-muted">
-                            <i class="fa fa-info-circle"></i> Belum ada data pasien yang terdaftar.
-                        </td>
-                    </tr>
-                @endif
-            </tbody>
-        </table>
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            @if($daftarPoli->isNotEmpty())
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Pasien</th>
+                                <th>Keluhan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($daftarPoli as $index => $pendaftaran)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $pendaftaran->pasien->nama }}</td>
+                                    <td>{{ $pendaftaran->keluhan }}</td>
+                                    <td>
+                                        @if($pendaftaran->status_periksa == 0)
+                                            <a href="{{ route('daftar_pasien.edit', $pendaftaran->id) }}" class="btn btn-danger btn-sm">Belum Diperiksa</a>
+                                        @else
+                                            <a href="{{ route('daftar_pasien.editSudahDiperiksa', $pendaftaran->id) }}" class="btn btn-success btn-sm">Sudah Diperiksa</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-center text-muted">
+                    <i class="fa fa-info-circle"></i> Belum ada data pasien yang terdaftar.
+                </p>
+            @endif
+        </div>
+    </div>
 </div>
 
 <!-- Modal for Success -->
