@@ -16,4 +16,9 @@ class Obat extends Model
         'harga',
     ];
     public $timestamps = false;
+
+    public function detailPeriksa()
+    {
+        return $this->hasMany(DetailPeriksa::class, 'id_obat');
+    }
 }

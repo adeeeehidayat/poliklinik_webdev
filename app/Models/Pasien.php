@@ -12,4 +12,10 @@ class Pasien extends Model
     protected $table = 'pasien';
     protected $fillable = ['nama', 'username', 'alamat', 'no_ktp', 'no_hp', 'password', 'no_rm'];
     public $timestamps = false;
+
+    // Relasi ke tabel daftar_poli
+    public function daftarPoli()
+    {
+        return $this->hasMany(DaftarPoli::class, 'id_pasien');
+    }
 }

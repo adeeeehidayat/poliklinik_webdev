@@ -65,10 +65,10 @@
                 </table>
 
                 <hr>
-                <h5 class="mb-3">Obat yang Diberikan:</h5>
+                <h5 class="mb-3">Obat yang Diberikan</h5>
                 <ul class="list-group mb-4">
-                    @foreach ($periksa->detailPeriksa as $detail)
-                        <li class="list-group-item">{{ $detail->obat->nama_obat }}</li>
+                    @foreach ($periksa->detailPeriksa as $index => $detail)
+                        <li class="list-group-item">{{ $index + 1 }}. {{ $detail->obat->nama_obat }}</li>
                     @endforeach
                 </ul>
 

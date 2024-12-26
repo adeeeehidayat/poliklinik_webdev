@@ -26,7 +26,6 @@ class Periksa extends Model
         return $this->belongsTo(DaftarPoli::class, 'id_daftar_poli');
     }
 
-    // Relasi dengan model DetailPeriksa jika ada
     public function detailPeriksa()
     {
         return $this->hasMany(DetailPeriksa::class, 'id_periksa');

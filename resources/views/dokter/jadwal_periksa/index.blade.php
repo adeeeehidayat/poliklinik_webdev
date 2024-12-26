@@ -3,9 +3,16 @@
 @section('content')
 <div class="container-fluid px-5 mt-4">
     <h1 class="mb-4">Jadwal Periksa</h1>
+
+    <!-- Card for Warning -->
+    <div class="alert alert-warning" role="alert">
+        Pada saat hari H jadwal periksa, Dokter tidak diperbolehkan mengubah hari maupun jam periksanya.
+    </div>
+
     <a href="{{ route('jadwal_periksa.create') }}" class="btn btn-success mb-3">Tambah Jadwal</a>
-    <table class="table table-bordered">
-        <thead>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
             <tr>
                 <th>No</th>
                 <th>Nama Dokter</th>
@@ -17,48 +24,50 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($jadwalPeriksa as $index => $jadwal)
+            @if ($jadwalPeriksa->isNotEmpty())
+                @foreach ($jadwalPeriksa as $index => $jadwal)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $jadwal->dokter->nama ?? 'Tidak Diketahui' }}</td>
+                        <td>{{ $jadwal->hari }}</td>
+                        <td>{{ $jadwal->jam_mulai }}</td>
+                        <td>{{ $jadwal->jam_selesai }}</td>
+                        <td>{{ $jadwal->status === 'Y' ? 'Aktif' : 'Tidak Aktif' }}</td>
+                        <td>
+                            @php
+                                $hariIndonesia = [
+                                    'Monday' => 'Senin',
+                                    'Tuesday' => 'Selasa',
+                                    'Wednesday' => 'Rabu',
+                                    'Thursday' => 'Kamis',
+                                    'Friday' => 'Jumat',
+                                    'Saturday' => 'Sabtu',
+                                    'Sunday' => 'Minggu'
+                                ];
+                                $hariIni = $hariIndonesia[\Carbon\Carbon::now()->format('l')];
+                            @endphp
+
+                            @if ($jadwal->hari === $hariIni)
+                                <button class="btn btn-secondary btn-sm" disabled>Edit</button>
+                            @else
+                                <a href="{{ route('jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            @endif
+
+                            <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $jadwal->dokter->nama ?? 'Tidak Diketahui' }}</td>
-                    <td>{{ $jadwal->hari }}</td>
-                    <td>{{ $jadwal->jam_mulai }}</td>
-                    <td>{{ $jadwal->jam_selesai }}</td>
-                    <td>{{ $jadwal->status === 'Y' ? 'Aktif' : 'Tidak Aktif' }}</td>
-                    <td>
-                        @php
-                            // Mapping hari dalam bahasa Indonesia
-                            $hariIndonesia = [
-                                'Monday' => 'Senin',
-                                'Tuesday' => 'Selasa',
-                                'Wednesday' => 'Rabu',
-                                'Thursday' => 'Kamis',
-                                'Friday' => 'Jumat',
-                                'Saturday' => 'Sabtu',
-                                'Sunday' => 'Minggu'
-                            ];
-
-                            // Mendapatkan hari real-time saat ini dalam bahasa Indonesia
-                            $hariIni = $hariIndonesia[\Carbon\Carbon::now()->format('l')];
-                        @endphp
-
-                        @if ($jadwal->hari === $hariIni)
-                            <!-- Tombol Edit Nonaktif -->
-                            <button class="btn btn-secondary btn-sm" disabled>Edit</button>
-                        @else
-                            <!-- Tombol Edit Aktif -->
-                            <a href="{{ route('jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        @endif
-
-                        <!-- Tombol Hapus -->
-                        <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
+                    <td colspan="7" class="text-center text-muted">
+                        <i class="fas fa-info-circle"></i> Belum ada data jadwal periksa.
                     </td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
 </div>
@@ -100,14 +109,12 @@
 @endif
 
 <script>
-    // Menampilkan modal sukses setelah halaman selesai dimuat
     window.addEventListener('DOMContentLoaded', (event) => {
         if (document.getElementById('successModal')) {
             var successModal = new bootstrap.Modal(document.getElementById('successModal'));
             successModal.show();
         }
 
-        // Menampilkan modal error jika ada
         if (document.getElementById('errorModal')) {
             var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
             errorModal.show();

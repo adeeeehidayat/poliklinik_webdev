@@ -50,41 +50,26 @@ class DaftarPasienController extends Controller
             // Ambil data pendaftaran
             $pendaftaran = DaftarPoli::findOrFail($id);
 
-            $tanggalPeriksa = $request->input('tanggal_periksa');
-            $formattedTanggalPeriksa = date('Y-m-d', strtotime($tanggalPeriksa));
-
-            // Ambil biaya dari form
-            $totalBiayaObat = $request->input('total_biaya_obat', 0); // Default 0 jika tidak ada
-            $biayaJasaDokter = 150000; // Biaya tetap untuk jasa dokter
-            $biayaPeriksa = $totalBiayaObat + $biayaJasaDokter;
-
             // Simpan data ke tabel periksa
             $periksa = Periksa::create([
                 'id_daftar_poli' => $pendaftaran->id,
-                'tgl_periksa' => $formattedTanggalPeriksa,
+                'tgl_periksa' => date('Y-m-d', strtotime($request->input('tanggal_periksa'))),
                 'catatan' => $request->input('catatan'),
-                'biaya_periksa' => $biayaPeriksa,
+                'biaya_periksa' => $request->input('biaya_total'),
             ]);
 
             // Simpan detail obat ke tabel detail_periksa
             if ($request->has('obat')) {
-                foreach ($request->input('obat') as $obatId) {
-                    DetailPeriksa::create([
-                        'id_periksa' => $periksa->id,
-                        'id_obat' => $obatId,
-                    ]);
-                }
+                $obatData = array_map(fn($id) => ['id_periksa' => $periksa->id, 'id_obat' => $id], $request->input('obat'));
+                DetailPeriksa::insert($obatData);
             }
 
             // Update status_periksa menjadi 1 untuk pasien yang telah diperiksa
-            $pendaftaran->update([
-                'status_periksa' => 1,
-            ]);
+            $pendaftaran->update(['status_periksa' => 1]);
 
             DB::commit();
 
             return redirect()->route('daftar_pasien.index')->with('success', 'Data periksa pasien berhasil disimpan.');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data periksa: ' . $e->getMessage());

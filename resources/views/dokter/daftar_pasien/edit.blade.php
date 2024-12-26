@@ -43,17 +43,14 @@
                 <!-- Biaya Obat dan Jasa Dokter -->
                 <div class="mb-3">
                     <label for="biaya_obat" class="form-label">Biaya Obat</label>
-                    <input type="text" class="form-control" id="biaya_obat" value="Rp. 0" disabled>
-                </div>
-
-                <div class="mb-3">
-                    <label for="biaya_jasa_dokter" class="form-label">Biaya Jasa Dokter</label>
-                    <input type="text" class="form-control" id="biaya_jasa_dokter" value="Rp. 150.000" disabled>
+                    <input type="text" class="form-control" id="biaya_obat_display" value="Rp. 0" readonly>
+                    <input type="hidden" id="biaya_obat" name="biaya_obat" value="0">
                 </div>
 
                 <div class="mb-3">
                     <label for="biaya_total" class="form-label">Biaya Total</label>
-                    <input type="text" class="form-control" id="biaya_total" value="Rp. 150.000" disabled>
+                    <input type="text" class="form-control" id="biaya_total_display" value="Rp. 150.000" readonly>
+                    <input type="hidden" id="biaya_total" name="biaya_total" value="150000">
                 </div>
 
                 <!-- Button Simpan dan Batal -->
@@ -68,30 +65,33 @@
 
 <!-- Script untuk menghitung biaya obat dan total -->
 <script>
-    // Fungsi untuk menghitung biaya
+    // Variabel untuk elemen yang digunakan
     const obatCheckboxes = document.querySelectorAll('input[name="obat[]"]');
     const biayaObatInput = document.getElementById('biaya_obat');
-    const biayaJasaDokterInput = document.getElementById('biaya_jasa_dokter');
+    const biayaObatDisplay = document.getElementById('biaya_obat_display');
     const biayaTotalInput = document.getElementById('biaya_total');
+    const biayaTotalDisplay = document.getElementById('biaya_total_display');
     const biayaJasaDokter = 150000;
 
-    // Hitung biaya saat checkbox berubah
-    obatCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            let totalBiayaObat = 0;
-            obatCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    totalBiayaObat += parseInt(checkbox.getAttribute('data-harga'));
-                }
-            });
+    // Fungsi untuk menghitung biaya
+    const hitungBiaya = () => {
+        let totalBiayaObat = 0;
 
-            // Update biaya obat
-            biayaObatInput.value = "Rp. " + totalBiayaObat.toLocaleString();
-
-            // Update total biaya
-            let totalBiaya = totalBiayaObat + biayaJasaDokter;
-            biayaTotalInput.value = "Rp. " + totalBiaya.toLocaleString();
+        obatCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                totalBiayaObat += parseInt(checkbox.getAttribute('data-harga'));
+            }
         });
-    });
+
+        // Perbarui input dan tampilan
+        biayaObatInput.value = totalBiayaObat;
+        biayaObatDisplay.value = `Rp. ${totalBiayaObat.toLocaleString()}`;
+        const totalBiaya = totalBiayaObat + biayaJasaDokter;
+        biayaTotalInput.value = totalBiaya;
+        biayaTotalDisplay.value = `Rp. ${totalBiaya.toLocaleString()}`;
+    };
+
+    // Event listener untuk checkbox
+    obatCheckboxes.forEach(checkbox => checkbox.addEventListener('change', hitungBiaya));
 </script>
 @endsection

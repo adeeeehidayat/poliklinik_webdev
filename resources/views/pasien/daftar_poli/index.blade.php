@@ -19,20 +19,30 @@
                 <!-- Dropdown Poli -->
                 <div class="mb-3">
                     <label for="id_poli" class="form-label">Pilih Poli</label>
-                    <select name="id_poli" id="id_poli" class="form-control" required>
-                        <option value="" disabled selected>Pilih Poli</option>
-                        @foreach($polis as $poli)
-                            <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
-                        @endforeach
-                    </select>
+                    <div class="input-group">
+                        <select name="id_poli" id="id_poli" class="form-control" required>
+                            <option value="" disabled selected>Pilih Poli</option>
+                            @foreach($polis as $poli)
+                                <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                            @endforeach
+                        </select>
+                        <span class="input-group-text">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Dropdown Jadwal Dokter -->
                 <div class="mb-3">
                     <label for="id_jadwal" class="form-label">Pilih Jadwal Dokter</label>
-                    <select name="id_jadwal" id="id_jadwal" class="form-control" required>
-                        <option value="" disabled selected>Pilih Jadwal</option>
-                    </select>
+                    <div class="input-group">
+                        <select name="id_jadwal" id="id_jadwal" class="form-control" required>
+                            <option value="" disabled selected>Pilih Jadwal</option>
+                        </select>
+                        <span class="input-group-text">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Input Keluhan -->

@@ -8,6 +8,7 @@
         <meta name="author" content="" />
         <title>Dokter - Poliklinik UDINUS</title>
         <link href="/assets/css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -30,6 +31,10 @@
                             <a class="nav-link {{ Request::routeIs('daftar_pasien.index') ? 'active' : '' }}" href="{{ route('daftar_pasien.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-injured"></i></div>
                                 Daftar Pasien
+                            </a>
+                            <a class="nav-link {{ Request::routeIs('riwayat_periksa.index') ? 'active' : '' }}" href="{{ route('riwayat_periksa.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-notes-medical"></i></div>
+                                Riwayat Periksa
                             </a>
                             <a class="nav-link {{ Request::routeIs('jadwal_periksa.index') ? 'active' : '' }}" href="{{ route('jadwal_periksa.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-days"></i></div>
@@ -57,7 +62,7 @@
                 </main>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="/assets/js/scripts.js"></script>
     </body>
 </html>
