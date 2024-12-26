@@ -51,5 +51,6 @@ Proyek ini adalah aplikasi web untuk sistem janji temu antara pasien dan dokter 
 2. ```/dokter/register``` : halaman register dokter
 3. ```/dokter/dashboard``` : halaman dashboard dokter
 4. ```/dokter/daftar_pasien``` : halaman kelola periksa daftar pasien
-5. ```/dokter/jadwal_periksa``` : halaman kelola jadwal periksa dokter
-6. ```/dokter/profil_dokter``` : halaman profil dokter
+5. ```/dokter/riwayat_periksa``` : halaman kelola riwayat periksa pasien
+6. ```/dokter/jadwal_periksa``` : halaman kelola jadwal periksa dokter
+7. ```/dokter/profil_dokter``` : halaman profil dokter
