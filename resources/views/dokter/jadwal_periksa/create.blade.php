@@ -1,7 +1,7 @@
 @extends('dokter.layout')
 
 @section('content')
-<div class="container-fluid px-5 mt-4">
+<div class="container-fluid px-5 mt-4 mb-4">
     <h1 class="mt-4">Tambah Jadwal Periksa</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Jadwal Periksa</li>

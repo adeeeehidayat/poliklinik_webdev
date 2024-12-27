@@ -1,7 +1,7 @@
 @extends('dokter.layout')
 
 @section('content')
-<div class="container-fluid px-5 mt-4 mb-5">
+<div class="container-fluid px-5 mt-4 mb-4">
     <h2>Periksa Pasien</h2>
     <div class="card">
         <div class="card-body">
@@ -48,13 +48,18 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="biaya_jasa_dokter" class="form-label">Biaya Jasa Dokter</label>
+                    <input type="text" class="form-control" id="biaya_jasa_dokter" value="Rp. 150.000" disabled>
+                </div>
+
+                <div class="mb-3">
                     <label for="biaya_total" class="form-label">Biaya Total</label>
                     <input type="text" class="form-control" id="biaya_total_display" value="Rp. 150.000" readonly>
                     <input type="hidden" id="biaya_total" name="biaya_total" value="150000">
                 </div>
 
                 <!-- Button Simpan dan Batal -->
-                <<div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i> Simpan
                     </button>

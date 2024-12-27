@@ -1,7 +1,7 @@
 @extends('pasien.layout')
 
 @section('content')
-<div class="container-fluid px-5 mt-4">
+<div class="container-fluid px-5 mt-4 mb-4">
     <h2>Riwayat Pendaftaran Poli</h2>
     <p>Berikut daftar riwayat pendaftaran pasien <strong>{{ session('pasien')->nama }}</strong> di Poliklinik UDINUS</p>
     <div class="card shadow-sm mt-4">

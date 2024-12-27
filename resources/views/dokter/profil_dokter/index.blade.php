@@ -1,7 +1,7 @@
 @extends('dokter.layout')
 
 @section('content')
-<div class="container-fluid px-5 mt-4">
+<div class="container-fluid px-5 mt-4 mb-4">
     <!-- Profil Dokter Section -->
     <div class="bg-light shadow-sm p-4 rounded-lg">
         <div class="mb-4">

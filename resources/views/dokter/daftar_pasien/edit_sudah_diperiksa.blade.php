@@ -1,7 +1,7 @@
 @extends('dokter.layout')
 
 @section('content')
-<div class="container-fluid px-5 mt-4 mb-5">
+<div class="container-fluid px-5 mt-4 mb-4">
     <h2>Edit Pemeriksaan Pasien</h2>
     <div class="card">
         <div class="card-body">

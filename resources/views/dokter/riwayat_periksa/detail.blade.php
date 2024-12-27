@@ -1,7 +1,7 @@
 @extends('dokter.layout')
 
 @section('content')
-<div class="container-fluid px-5 mt-4">
+<div class="container-fluid px-5 mt-4 mb-4">
     <h1 class="mb-4">Riwayat Pemeriksaan Pasien</h1>
     <p>Berikut adalah riwayat pemeriksaan untuk pasien</p>
 
