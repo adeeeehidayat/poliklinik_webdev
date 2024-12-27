@@ -32,20 +32,27 @@
                 </div>
 
                 <!-- Pilih Obat -->
-                <div class="mb-3">
-                    <label for="obat" class="form-label">Pilih Obat</label>
-                    <div id="obat">
-                        @foreach ($obat as $item)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $item->id }}" id="obat{{ $item->id }}" name="obat[]" data-harga="{{ $item->harga }}">
-                                <label class="form-check-label" for="obat{{ $item->id }}">
-                                    {{ $item->nama_obat }} - Rp. {{ number_format($item->harga, 0, ',', '.') }}
-                                </label>
-                            </div>
-                        @endforeach
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">Pilih Obat</h5>
+                        <!-- Search Bar untuk mencari obat -->
+                        <input type="text" class="form-control" id="search-obat" placeholder="Cari obat...">
                     </div>
-                    <div class="invalid-feedback">
-                        Setidaknya satu obat harus dipilih.
+                    <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                        <!-- Daftar Obat dengan checkbox -->
+                        <div id="obat">
+                            @foreach ($obat as $item)
+                                <div class="form-check obat-item">
+                                    <input class="form-check-input" type="checkbox" value="{{ $item->id }}" id="obat{{ $item->id }}" name="obat[]" data-harga="{{ $item->harga }}">
+                                    <label class="form-check-label" for="obat{{ $item->id }}">
+                                        {{ $item->nama_obat }} - Rp. {{ number_format($item->harga, 0, ',', '.') }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="invalid-feedback">
+                            Setidaknya satu obat harus dipilih.
+                        </div>
                     </div>
                 </div>
 
@@ -127,6 +134,23 @@
         </div>
     </div>
 </div>
+
+<!-- Script untuk filter berdasarkan nama obat -->
+<script>
+    document.getElementById('search-obat').addEventListener('input', function() {
+        var searchQuery = this.value.toLowerCase();
+        var obatItems = document.querySelectorAll('.obat-item');
+
+        obatItems.forEach(function(item) {
+            var label = item.querySelector('label').textContent.toLowerCase();
+            if (label.includes(searchQuery)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 <!-- Script untuk menghitung biaya obat dan total -->
 <script>

@@ -45,23 +45,31 @@ class JadwalPeriksaController extends Controller
             'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
         ]);
 
-        // Cek apakah jadwal sudah ada atau bertabrakan
-        $jadwalBertabrakan = JadwalPeriksa::where('id_dokter', $dokter->id)
-            ->where('hari', $request->hari)
+        // Memeriksa apakah ada jadwal periksa yang bertabrakan dengan jadwal baru
+        $jadwalBertabrakan = JadwalPeriksa::where('id_dokter', $dokter->id) // Filter berdasarkan ID dokter yang sedang login
+            ->where('hari', $request->hari) // Filter berdasarkan hari yang sama dengan jadwal baru
             ->where(function ($query) use ($request) {
+                // Memeriksa apakah jam mulai dari jadwal yang sudah ada berada dalam rentang waktu jadwal baru
                 $query->whereBetween('jam_mulai', [$request->jam_mulai, $request->jam_selesai])
+                    // Memeriksa apakah jam selesai dari jadwal yang sudah ada berada dalam rentang waktu jadwal baru
                     ->orWhereBetween('jam_selesai', [$request->jam_mulai, $request->jam_selesai])
+                    // Memeriksa kondisi tambahan untuk tabrakan
                     ->orWhere(function ($subQuery) use ($request) {
+                        // Memeriksa apakah jam mulai dari jadwal yang sudah ada lebih awal atau sama dengan jam mulai jadwal baru
                         $subQuery->where('jam_mulai', '<=', $request->jam_mulai)
+                            // Memeriksa apakah jam selesai dari jadwal yang sudah ada lebih lambat atau sama dengan jam selesai jadwal baru
                             ->where('jam_selesai', '>=', $request->jam_selesai);
                     });
             })
-            ->exists();
+            // Mengecek apakah ada hasil yang ditemukan berdasarkan kondisi di atas
+            ->exists(); // Jika ada jadwal yang bertabrakan, $jadwalBertabrakan akan bernilai true
 
+        // Jika jadwal bertabrakan, tampilkan pesan error
         if ($jadwalBertabrakan) {
             return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal periksa bertabrakan dengan jadwal lain.');
         }
 
+        // Simpan jadwal periksa baru
         JadwalPeriksa::create([
             'id_dokter' => $dokter->id,
             'hari' => $request->hari,
@@ -78,13 +86,14 @@ class JadwalPeriksaController extends Controller
      */
     public function edit($id)
     {
-        $dokter = session('dokter');
+        $dokter = session('dokter'); // Mengambil data dokter dari session
 
+        // Mengambil jadwal periksa berdasarkan id dan dokter yang login
         $jadwalPeriksa = JadwalPeriksa::where('id', $id)
             ->where('id_dokter', $dokter->id)
             ->first();
 
-        return view('dokter.jadwal_periksa.edit', compact('jadwalPeriksa', 'dokter'));
+        return view('dokter.jadwal_periksa.edit', compact('jadwalPeriksa', 'dokter')); // Kirim data ke view
     }
 
     /**

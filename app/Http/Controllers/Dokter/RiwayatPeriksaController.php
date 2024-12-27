@@ -29,10 +29,16 @@ class RiwayatPeriksaController extends Controller
 
         // Ambil riwayat pemeriksaan pasien berdasarkan dokter yang sedang login
         $riwayatPeriksa = Periksa::whereHas('daftarPoli.jadwal', function ($query) use ($dokter) {
+            // Memfilter hanya untuk jadwal yang terkait dengan dokter yang sedang login
             $query->where('id_dokter', $dokter->id);
-        })->whereHas('daftarPoli', function ($query) use ($id) {
+        })
+        ->whereHas('daftarPoli', function ($query) use ($id) {
+            // Memfilter hanya untuk poli yang terkait dengan pasien tertentu
             $query->where('id_pasien', $id);
-        })->with(['daftarPoli.pasien', 'detailPeriksa.obat'])
+        })
+        // Mengambil data terkait dengan relasi yang ditentukan
+        ->with(['daftarPoli.pasien', 'detailPeriksa.obat'])
+        // Mengeksekusi query dan mendapatkan hasilnya
         ->get();
 
         return view('dokter.riwayat_periksa.detail', compact('riwayatPeriksa'));

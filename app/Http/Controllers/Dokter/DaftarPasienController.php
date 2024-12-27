@@ -99,6 +99,7 @@ class DaftarPasienController extends Controller
             // Update data pemeriksaan
             $periksa->update([
                 'tgl_periksa' => $request->input('tanggal_periksa'),
+                // 'tgl_periksa' => Carbon::createFromFormat('Y-m-d\TH:i', $request->input('tanggal_periksa')),
                 'catatan' => $request->input('catatan'),
                 'biaya_periksa' => $request->input('biaya_periksa'),
             ]);

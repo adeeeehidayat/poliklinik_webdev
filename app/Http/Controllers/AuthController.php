@@ -56,8 +56,8 @@ class AuthController extends Controller
             'nama' => 'required|string|max:150',
             'username' => 'required|string|max:100',
             'alamat' => 'required|string|max:255',
-            'no_ktp' => 'required|integer',
-            'no_hp' => 'required|integer',
+            'no_ktp' => 'required|string',
+            'no_hp' => 'required|string',
             'password' => 'required|string|max:100',
         ]);
 
