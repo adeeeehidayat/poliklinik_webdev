@@ -16,11 +16,6 @@ class DaftarPasienController extends Controller
     {
         $dokter = session('dokter');
 
-        // Validasi jika dokter belum login
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
-
         // Ambil daftar pasien berdasarkan jadwal dokter yang sedang login
         $daftarPoli = DaftarPoli::whereHas('jadwal', function ($query) use ($dokter) {
             $query->where('id_dokter', $dokter->id);

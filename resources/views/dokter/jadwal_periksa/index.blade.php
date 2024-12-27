@@ -64,11 +64,13 @@
                                             </a>
                                         @endif
 
+                                        <!--
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $jadwal->id }}">
                                             <i class="fas fa-trash-alt"></i> Hapus
                                         </button>
+                                        -->
 
-                                        <!-- Modal Konfirmasi Hapus -->
+                                        <!-- Modal Konfirmasi Hapus 
                                         <div class="modal fade" id="deleteModal{{ $jadwal->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -89,7 +91,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </td>
                                 </tr>
                             @endforeach

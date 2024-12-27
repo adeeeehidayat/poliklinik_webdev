@@ -51,7 +51,7 @@
             @if ($pendaftaran->status_periksa == 1)
                 <hr>
                 <h5 class="mb-4">Informasi Pemeriksaan</h5>
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <tbody>
                         <tr>
                             <th>Tanggal Periksa</th>

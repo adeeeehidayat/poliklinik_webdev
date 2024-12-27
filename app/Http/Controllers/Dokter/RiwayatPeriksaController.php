@@ -13,11 +13,6 @@ class RiwayatPeriksaController extends Controller
     {
         $dokter = session('dokter');
 
-        // Validasi jika dokter belum login
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
-
         // Ambil daftar pasien unik berdasarkan dokter yang sedang login
         $daftarPasien = DaftarPoli::whereHas('jadwal', function ($query) use ($dokter) {
             $query->where('id_dokter', $dokter->id);
@@ -31,11 +26,6 @@ class RiwayatPeriksaController extends Controller
     public function detail($id)
     {
         $dokter = session('dokter');
-
-        // Validasi jika dokter belum login
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
 
         // Ambil riwayat pemeriksaan pasien berdasarkan dokter yang sedang login
         $riwayatPeriksa = Periksa::whereHas('daftarPoli.jadwal', function ($query) use ($dokter) {

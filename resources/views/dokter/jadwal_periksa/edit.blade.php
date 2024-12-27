@@ -11,8 +11,7 @@
         <div class="mb-3 position-relative">
             <label for="hari" class="form-label">Hari</label>
             <div class="input-group">
-                <select name="hari" class="form-control" id="hari">
-                    <option value="">Pilih Hari</option>
+                <select name="hari" class="form-control" id="hari" disabled>
                     <option value="Senin" {{ $jadwalPeriksa->hari === 'Senin' ? 'selected' : '' }}>Senin</option>
                     <option value="Selasa" {{ $jadwalPeriksa->hari === 'Selasa' ? 'selected' : '' }}>Selasa</option>
                     <option value="Rabu" {{ $jadwalPeriksa->hari === 'Rabu' ? 'selected' : '' }}>Rabu</option>
@@ -21,18 +20,15 @@
                     <option value="Sabtu" {{ $jadwalPeriksa->hari === 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
                     <option value="Minggu" {{ $jadwalPeriksa->hari === 'Minggu' ? 'selected' : '' }}>Minggu</option>
                 </select>
-                <span class="input-group-text">
-                    <i class="fas fa-chevron-down"></i>
-                </span>
             </div>
         </div>
         <div class="mb-3">
             <label for="jam_mulai">Jam Mulai</label>
-            <input type="time" name="jam_mulai" class="form-control" id="jam_mulai" value="{{ $jadwalPeriksa->jam_mulai }}">
+            <input type="time" name="jam_mulai" class="form-control" id="jam_mulai" value="{{ $jadwalPeriksa->jam_mulai }}" disabled>
         </div>
         <div class="mb-3">
             <label for="jam_selesai">Jam Selesai</label>
-            <input type="time" name="jam_selesai" class="form-control" id="jam_selesai" value="{{ $jadwalPeriksa->jam_selesai }}">
+            <input type="time" name="jam_selesai" class="form-control" id="jam_selesai" value="{{ $jadwalPeriksa->jam_selesai }}" disabled>
         </div>
         <div class="mb-3">
             <label for="status">Status</label>

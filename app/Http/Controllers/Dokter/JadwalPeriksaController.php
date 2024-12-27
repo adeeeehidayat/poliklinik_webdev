@@ -16,11 +16,6 @@ class JadwalPeriksaController extends Controller
     {
         $dokter = session('dokter');
 
-        // Validasi jika dokter belum login
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
-
         // Mengambil jadwal periksa berdasarkan id dokter
         $jadwalPeriksa = JadwalPeriksa::where('id_dokter', $dokter->id)->get();
 
@@ -34,10 +29,6 @@ class JadwalPeriksaController extends Controller
     {
         $dokter = session('dokter');
 
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
-
         return view('dokter.jadwal_periksa.create', compact('dokter'));
     }
 
@@ -47,10 +38,6 @@ class JadwalPeriksaController extends Controller
     public function store(Request $request)
     {
         $dokter = session('dokter');
-
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
 
         $request->validate([
             'hari' => 'required|string|max:10',
@@ -93,17 +80,9 @@ class JadwalPeriksaController extends Controller
     {
         $dokter = session('dokter');
 
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
-
         $jadwalPeriksa = JadwalPeriksa::where('id', $id)
             ->where('id_dokter', $dokter->id)
             ->first();
-
-        if (!$jadwalPeriksa) {
-            return redirect()->route('dokter.jadwal_periksa.index')->with('error', 'Jadwal periksa tidak ditemukan.');
-        }
 
         return view('dokter.jadwal_periksa.edit', compact('jadwalPeriksa', 'dokter'));
     }
@@ -115,65 +94,42 @@ class JadwalPeriksaController extends Controller
     {
         $dokter = session('dokter');
 
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
-
+        // Ambil jadwal periksa berdasarkan id dan dokter yang login
         $jadwalPeriksa = JadwalPeriksa::where('id', $id)
             ->where('id_dokter', $dokter->id)
-            ->first();
-
-        if (!$jadwalPeriksa) {
-            return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal periksa tidak ditemukan.');
-        }
+            ->firstOrFail();
 
         $request->validate([
-            'hari' => 'required|string|max:10',
-            'jam_mulai' => 'required|date_format:H:i',
-            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
-            'status' => 'required|string|max:10',
+            'status' => 'required|string|in:Y,N', // Validasi nilai hanya Y atau N
         ]);
 
-        // Validasi jika status akan diubah menjadi aktif
+        // Jika status akan diubah menjadi aktif (Y)
         if ($request->status === 'Y') {
-            $jadwalAktif = JadwalPeriksa::where('id_dokter', $dokter->id)
+            // Nonaktifkan jadwal lain yang sedang aktif untuk dokter yang sama
+            JadwalPeriksa::where('id_dokter', $dokter->id)
                 ->where('status', 'Y')
                 ->where('id', '!=', $id)
-                ->exists();
-
-            if ($jadwalAktif) {
-                return redirect()->route('jadwal_periksa.index')->with('error', 'Terdapat jadwal yang sedang aktif. Mohon nonaktifkan jadwal tersebut terlebih dahulu.');
-            }
+                ->update(['status' => 'N']);
         }
 
+        // Perbarui status jadwal yang dipilih
         $jadwalPeriksa->update([
-            'hari' => $request->hari,
-            'jam_mulai' => $request->jam_mulai,
-            'jam_selesai' => $request->jam_selesai,
             'status' => $request->status,
         ]);
 
-        return redirect()->route('jadwal_periksa.index')->with('success', 'Jadwal periksa berhasil diperbarui!');
+        return redirect()->route('jadwal_periksa.index')->with('success', 'Status jadwal periksa berhasil diperbarui!');
     }
 
     /**
      * Menghapus jadwal periksa dari database.
      */
-    public function destroy($id)
+    /* public function destroy($id)
     {
         $dokter = session('dokter');
-
-        if (!$dokter) {
-            return redirect()->route('dokter.login.form')->with('error', 'Anda harus login terlebih dahulu.');
-        }
 
         $jadwalPeriksa = JadwalPeriksa::where('id', $id)
             ->where('id_dokter', $dokter->id)
             ->first();
-
-        if (!$jadwalPeriksa) {
-            return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal periksa tidak ditemukan.');
-        }
 
         // Cek apakah jadwal ini memiliki pasien yang terdaftar
         $pasienTerdaftar = DB::table('daftar_poli')->where('id_jadwal', $jadwalPeriksa->id)->exists();
@@ -185,6 +141,6 @@ class JadwalPeriksaController extends Controller
         $jadwalPeriksa->delete();
 
         return redirect()->route('jadwal_periksa.index')->with('success', 'Jadwal periksa berhasil dihapus!');
-    }
+    } */
 
 }
