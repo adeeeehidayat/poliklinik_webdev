@@ -46,8 +46,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('riwayat_pendaftaran.detail_periksa', ['id' => $pendaftaran->id]) }}" class="btn btn-info btn-sm">Detail</a>
-                                        <!-- Tindakan lain seperti batal pendaftaran bisa ditambahkan disini -->
+                                        <a href="{{ route('riwayat_pendaftaran.detail_periksa', ['id' => $pendaftaran->id]) }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i> Detail
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

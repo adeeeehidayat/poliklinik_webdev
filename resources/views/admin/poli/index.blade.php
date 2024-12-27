@@ -6,7 +6,9 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Poli</li>
     </ol>
-    <a href="{{ route('poli.create') }}" class="btn btn-primary mb-3">Tambah Poli</a>
+    <a href="{{ route('poli.create') }}" class="btn btn-primary mb-3">
+        <i class="fas fa-plus"></i> Tambah Poli
+    </a>
     <div class="card shadow-sm">
         <div class="card-body">
             @if ($polis->isNotEmpty())

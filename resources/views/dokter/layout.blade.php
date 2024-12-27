@@ -10,6 +10,11 @@
         <link href="/assets/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <style>
+        .dropdown-toggle::after {
+            display: none; /* Menghilangkan tanda panah dropdown */
+        }
+    </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-light bg-light" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
@@ -17,6 +22,23 @@
             <a class="navbar-brand ps-3" href="{{ route('dokter.dashboard') }}">Dokter</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+
+            <!-- User Icon and Dropdown -->
+            <div class="ms-auto dropdown">
+                <button class="btn btn-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li>
+                        <form method="POST" action="{{ route('dokter.dokterLogout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -44,14 +66,6 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-md"></i></div>
                                 Profile
                             </a>
-                            <div class="sb-sidenav-footer">
-                                <form method="POST" action="{{ route('dokter.dokterLogout') }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger w-100">
-                                        <i class="fas fa-sign-out-alt"></i> Logout
-                                    </button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </nav>

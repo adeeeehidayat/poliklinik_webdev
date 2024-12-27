@@ -70,7 +70,7 @@
 
         <!-- Button Edit -->
         <div class="d-flex justify-content-between">
-            <a href="{{ route('profil_dokter.edit') }}" class="btn btn-warning btn-lg">
+            <a href="{{ route('profil_dokter.edit') }}" class="btn btn-warning">
                 <i class="fas fa-edit"></i> Edit Profil
             </a>
         </div>

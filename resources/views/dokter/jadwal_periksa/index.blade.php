@@ -9,9 +9,11 @@
         Pada saat hari H jadwal periksa, Dokter tidak diperbolehkan mengubah hari maupun jam periksanya.
     </div>
 
-    <a href="{{ route('jadwal_periksa.create') }}" class="btn btn-success mb-3">Tambah Jadwal</a>
+    <a href="{{ route('jadwal_periksa.create') }}" class="btn btn-primary mb-3">
+        <i class="fas fa-plus"></i> Tambah Jadwal
+    </a>
 
-    <div class="card shadow-sm mt-4">
+    <div class="card shadow-sm">
         <div class="card-body">
             @if ($jadwalPeriksa->isNotEmpty())
                 <div class="table-responsive">
@@ -57,15 +59,21 @@
                                         @endphp
 
                                         @if ($jadwal->hari === $hariIni)
-                                            <button class="btn btn-secondary btn-sm" disabled>Edit</button>
+                                            <button class="btn btn-secondary btn-sm" disabled>
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
                                         @else
-                                            <a href="{{ route('jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
                                         @endif
 
                                         <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i> Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

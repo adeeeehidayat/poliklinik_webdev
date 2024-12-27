@@ -26,9 +26,13 @@
                                     <td>{{ $pendaftaran->keluhan }}</td>
                                     <td>
                                         @if($pendaftaran->status_periksa == 0)
-                                            <a href="{{ route('daftar_pasien.edit', $pendaftaran->id) }}" class="btn btn-danger btn-sm">Belum Diperiksa</a>
+                                            <a href="{{ route('daftar_pasien.edit', $pendaftaran->id) }}" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-times"></i> Belum Diperiksa
+                                            </a>
                                         @else
-                                            <a href="{{ route('daftar_pasien.editSudahDiperiksa', $pendaftaran->id) }}" class="btn btn-success btn-sm">Sudah Diperiksa</a>
+                                            <a href="{{ route('daftar_pasien.editSudahDiperiksa', $pendaftaran->id) }}" class="btn btn-success btn-sm">
+                                                <i class="fas fa-check"></i> Sudah Diperiksa
+                                            </a>
                                         @endif
                                     </td>
                                 </tr>

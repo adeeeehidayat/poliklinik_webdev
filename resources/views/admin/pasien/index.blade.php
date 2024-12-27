@@ -6,7 +6,9 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Pasien</li>
     </ol>
-    <a href="{{ route('pasien.create') }}" class="btn btn-primary mb-3">Tambah Pasien</a>
+    <a href="{{ route('pasien.create') }}" class="btn btn-primary mb-3">
+        <i class="fas fa-plus"></i> Tambah Pasien
+    </a>
     <div class="card shadow-sm">
         <div class="card-body">
             @if ($pasiens->isNotEmpty())

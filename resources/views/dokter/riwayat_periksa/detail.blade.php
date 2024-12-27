@@ -61,7 +61,9 @@
         </div>
 
         <div class="d-flex justify-content-end mt-3">
-            <a href="{{ route('riwayat_periksa.index') }}" class="btn btn-secondary btn-lg">Kembali</a>
+            <a href="{{ route('riwayat_periksa.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
         </div>
 
     @else

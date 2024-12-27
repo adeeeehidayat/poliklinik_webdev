@@ -7,7 +7,7 @@
             <h4>Detail Pemeriksaan Pasien</h4>
         </div>
         <div class="card-body">
-            <table class="table table-striped">
+            <table class="table table-hover">
                 <tbody>
                     <tr>
                         <th>Poliklinik</th>

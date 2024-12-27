@@ -86,10 +86,10 @@
 
             <!-- Button Update and Cancel -->
             <div class="d-flex justify-content-end">
-                <a href="{{ route('profil_dokter.index') }}" class="btn btn-secondary btn-lg">
+                <a href="{{ route('profil_dokter.index') }}" class="btn btn-secondary">
                     <i class="fas fa-times"></i> Batal
                 </a>
-                <button type="submit" class="btn btn-success btn-lg ms-3">
+                <button type="submit" class="btn btn-primary ms-3">
                     <i class="fas fa-save"></i> Update Profil
                 </button>
             </div>

@@ -54,9 +54,13 @@
                 </div>
 
                 <!-- Button Simpan dan Batal -->
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ route('daftar_pasien.index') }}" class="btn btn-secondary ms-2">Batal</a>
+                <<div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Simpan
+                    </button>
+                    <a href="{{ route('daftar_pasien.index') }}" class="btn btn-secondary ms-2">
+                        <i class="fas fa-times"></i> Batal
+                    </a>
                 </div>
             </form>
         </div>

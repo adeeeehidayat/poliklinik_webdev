@@ -37,8 +37,12 @@
             </select>
         </div>
         <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('dokter.index') }}" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Simpan
+            </button>
+            <a href="{{ route('dokter.index') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Batal
+            </a>
         </div>
     </form>
 </div>

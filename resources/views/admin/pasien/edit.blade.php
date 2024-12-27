@@ -38,8 +38,12 @@
             <input type="text" class="form-control" id="no_rm" name="no_rm" value="{{ $pasien->no_rm }}" required>
         </div>
         <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Perbarui</button>
-            <a href="{{ route('pasien.index') }}" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Perbarui
+            </button>
+            <a href="{{ route('pasien.index') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Batal
+            </a>
         </div>
     </form>
 </div>
