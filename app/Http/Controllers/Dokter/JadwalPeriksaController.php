@@ -179,7 +179,7 @@ class JadwalPeriksaController extends Controller
         $pasienTerdaftar = DB::table('daftar_poli')->where('id_jadwal', $jadwalPeriksa->id)->exists();
 
         if ($pasienTerdaftar) {
-            return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal ini tidak dapat dihapus karena masih ada pasien yang terdaftar.');
+            return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal ini tidak dapat dihapus karena ada pasien yang terdaftar.');
         }
 
         $jadwalPeriksa->delete();

@@ -3,13 +3,9 @@
 @section('content')
 <div class="container-fluid px-5 mt-4 mb-4">
     <h1 class="mb-4">Jadwal Periksa</h1>
+    <p>Berikut adalah daftar jadwal periksa <strong>{{ session('dokter')->nama }}</strong></p>
 
-    <!-- Card for Warning -->
-    <div class="alert alert-warning" role="alert">
-        Pada saat hari H jadwal periksa, Dokter tidak diperbolehkan mengubah hari maupun jam periksanya.
-    </div>
-
-    <a href="{{ route('jadwal_periksa.create') }}" class="btn btn-primary mb-3">
+    <a href="{{ route('jadwal_periksa.create') }}" class="btn btn-primary mb-3 mt-4">
         <i class="fas fa-plus"></i> Tambah Jadwal
     </a>
 
@@ -68,19 +64,38 @@
                                             </a>
                                         @endif
 
-                                        <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash-alt"></i> Hapus
-                                            </button>
-                                        </form>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $jadwal->id }}">
+                                            <i class="fas fa-trash-alt"></i> Hapus
+                                        </button>
+
+                                        <!-- Modal Konfirmasi Hapus -->
+                                        <div class="modal fade" id="deleteModal{{ $jadwal->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus jadwal periksa untuk dokter <strong>{{ $jadwal->dokter->nama }}</strong> pada hari <strong>{{ $jadwal->hari }}</strong>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        <form action="{{ route('jadwal_periksa.destroy', $jadwal->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </ </div>
             @else
                 <p class="text-center text-muted">
                     <i class="fa fa-info-circle"></i> Belum ada data jadwal periksa.

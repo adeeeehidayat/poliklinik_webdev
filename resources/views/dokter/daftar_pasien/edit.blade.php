@@ -39,7 +39,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $item->id }}" id="obat{{ $item->id }}" name="obat[]" data-harga="{{ $item->harga }}">
                                 <label class="form-check-label" for="obat{{ $item->id }}">
-                                    {{ $item->nama_obat }} - Rp. {{ $item->harga }} 
+                                    {{ $item->nama_obat }} - Rp. {{ number_format($item->harga, 0, ',', '.') }}
                                 </label>
                             </div>
                         @endforeach
