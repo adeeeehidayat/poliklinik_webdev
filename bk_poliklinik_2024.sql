@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 24, 2024 at 05:43 PM
+-- Generation Time: Dec 27, 2024 at 03:58 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -60,13 +60,13 @@ CREATE TABLE `daftar_poli` (
 --
 
 INSERT INTO `daftar_poli` (`id`, `id_pasien`, `id_jadwal`, `keluhan`, `no_antrian`, `status_periksa`) VALUES
-(1, 1, 1, 'sakitttt', 1, 0),
-(2, 1, 1, 'periksa sekali lagi dok', 2, 0),
-(3, 1, 1, 'daftar ke 3 kalinya', 3, 0),
-(4, 2, 1, 'saya ade, mau periksa ke dr. ifan', 4, 0),
 (5, 2, 2, 'saya sakit pak budi', 1, 1),
-(6, 2, 2, 'saya sakit gigi pak budi', 2, 0),
-(7, 1, 3, 'mau periksa gigi pak budi', 1, 0);
+(8, 2, 3, 'periksa ke 2', 1, 1),
+(11, 8, 3, 'sakit gigi dok budi', 2, 1),
+(12, 2, 3, 'periksa ke 3', 3, 1),
+(13, 9, 3, 'mau periksa gigi pak budi', 4, 1),
+(14, 9, 3, 'periksa ke 2', 5, 0),
+(15, 12, 3, 'saya sakit gigi pak budi', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -85,8 +85,15 @@ CREATE TABLE `detail_periksa` (
 --
 
 INSERT INTO `detail_periksa` (`id`, `id_periksa`, `id_obat`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(23, 7, 1),
+(24, 7, 2),
+(25, 8, 1),
+(28, 9, 1),
+(29, 9, 2),
+(30, 10, 2),
+(31, 1, 1),
+(32, 1, 2),
+(35, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -110,7 +117,8 @@ CREATE TABLE `dokter` (
 
 INSERT INTO `dokter` (`id`, `nama`, `username`, `alamat`, `no_hp`, `password`, `id_poli`) VALUES
 (1, 'Ifan', 'Ifan', 'Semarang', 1222, 'Semarang', 4),
-(2, 'dr. Budi', 'dokterbudi', 'Ngaliyan', 628912345, 'dokterbudi', 1);
+(2, 'dr. Budi Santoso S.K.G.', 'dokterbudi', 'Ngaliyan', 62891234, 'dokterbudi', 1),
+(5, 'dr. Sinta S.K.G.', 'doktersinta', 'Semarang', 1234, 'doktersinta', 1);
 
 -- --------------------------------------------------------
 
@@ -132,10 +140,10 @@ CREATE TABLE `jadwal_periksa` (
 --
 
 INSERT INTO `jadwal_periksa` (`id`, `id_dokter`, `hari`, `jam_mulai`, `jam_selesai`, `status`) VALUES
-(1, 1, 'Selasa', '10:00:00', '11:00:00', 'Y'),
 (2, 2, 'Rabu', '10:00:00', '10:45:00', 'N'),
 (3, 2, 'Selasa', '10:00:00', '10:45:00', 'Y'),
-(9, 1, 'Jumat', '10:00:00', '11:00:00', 'N');
+(10, 1, 'Senin', '10:00:00', '10:45:00', 'N'),
+(14, 2, 'Jumat', '08:00:00', '09:00:00', 'N');
 
 -- --------------------------------------------------------
 
@@ -181,7 +189,10 @@ CREATE TABLE `pasien` (
 
 INSERT INTO `pasien` (`id`, `nama`, `username`, `alamat`, `no_ktp`, `no_hp`, `password`, `no_rm`) VALUES
 (1, 'Adi', 'Adi', 'Semarang', 1111, 12345, 'Semarang', '202412-001'),
-(2, 'Ade', 'Ade', 'Kendal', 1133, 1354657, 'Kendal', '202412-002');
+(2, 'Ade', 'Ade', 'Kendal', 1133, 1354657, 'Kendal', '202412-002'),
+(8, 'Citra', 'Citra', 'Perum Kalinda', 2222, 2222, 'Kendal', '202412-003'),
+(9, 'Caroline', 'Caroline', 'Kendal', 3333, 3333, 'Kendal', '202412-004'),
+(12, 'Kristo', 'Kristo', 'Semarang', 6666, 6666, 'Semarang', '202412-005');
 
 -- --------------------------------------------------------
 
@@ -202,7 +213,12 @@ CREATE TABLE `periksa` (
 --
 
 INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_periksa`) VALUES
-(1, 5, '2024-12-25', 'minum obatnya jangan di skip', 150000);
+(1, 5, '2024-12-25', 'minum obatnya jangan di skip ya, saya kasih obat paracetamol dan ibuprofen', 175000),
+(7, 11, '2024-12-18', 'diminum obatnya ya', 175000),
+(8, 8, '2024-12-26', 'oke, diminum paracetamol nya', 155000),
+(9, 12, '2024-12-27', 'diminum obatnya ya', 175000),
+(10, 13, '2024-12-27', 'ya caroline, diminum obatnya', 170000),
+(11, 15, '2024-12-27', 'diminum obatnya, sya kasih paracetamol aja', 155000);
 
 -- --------------------------------------------------------
 
@@ -305,25 +321,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `daftar_poli`
 --
 ALTER TABLE `daftar_poli`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `detail_periksa`
 --
 ALTER TABLE `detail_periksa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `jadwal_periksa`
 --
 ALTER TABLE `jadwal_periksa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `obat`
@@ -335,13 +351,13 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `periksa`
 --
 ALTER TABLE `periksa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `poli`
