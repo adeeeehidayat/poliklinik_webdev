@@ -72,7 +72,7 @@ class JadwalPeriksaController extends Controller
             ->exists();
 
         if ($jadwalBertabrakan) {
-            return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal sudah ada atau bertabrakan dengan jadwal lain.');
+            return redirect()->route('jadwal_periksa.index')->with('error', 'Jadwal periksa bertabrakan dengan jadwal lain.');
         }
 
         JadwalPeriksa::create([

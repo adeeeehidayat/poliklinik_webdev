@@ -8,7 +8,6 @@
     </ol>
     <form action="{{ route('jadwal_periksa.update', $jadwalPeriksa->id) }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="mb-3 position-relative">
             <label for="hari" class="form-label">Hari</label>
             <div class="input-group">

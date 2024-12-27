@@ -4,7 +4,9 @@
 <div class="container-fluid px-5 mt-4 mb-4">
     <h1 class="mt-4">Edit Pasien</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Pasien</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="text-decoration: none;">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('pasien.index') }}" style="text-decoration: none;">Pasien</a></li>
+        <li class="breadcrumb-item active">Edit Pasien</li>
     </ol>
     <form action="{{ route('pasien.update', $pasien->id) }}" method="POST">
         @csrf

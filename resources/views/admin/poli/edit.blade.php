@@ -4,7 +4,9 @@
 <div class="container-fluid px-5 mt-4 mb-4">
     <h1 class="mt-4">Edit Poli</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Poli</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="text-decoration: none;">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('poli.index') }}" style="text-decoration: none;">Poli</a></li>
+        <li class="breadcrumb-item active">Edit Poli</li>
     </ol>
     <form action="{{ route('poli.update', $poli->id) }}" method="POST">
         @csrf

@@ -105,14 +105,23 @@ Route::middleware(['dokter.auth'])->group(function () {
     Route::get('/dokter/riwayat-periksa', [RiwayatPeriksaController::class, 'index'])->name('riwayat_periksa.index');
     Route::get('/dokter/riwayat-periksa/{id}', [RiwayatPeriksaController::class, 'detail'])->name('riwayat_periksa.detail');
 
-    Route::resource('/jadwal-periksa', JadwalPeriksaController::class)->except(['show'])->names([
-        'index' => 'jadwal_periksa.index',
-        'create' => 'jadwal_periksa.create',
-        'store' => 'jadwal_periksa.store',
-        'edit' => 'jadwal_periksa.edit',
-        'update' => 'jadwal_periksa.update',
-        'destroy' => 'jadwal_periksa.destroy',
-    ]);
+    // Rute untuk menampilkan daftar jadwal periksa
+    Route::get('/dokter/jadwal-periksa', [JadwalPeriksaController::class, 'index'])->name('jadwal_periksa.index');
+
+    // Rute untuk menampilkan form membuat jadwal periksa baru
+    Route::get('/dokter/jadwal-periksa/create', [JadwalPeriksaController::class, 'create'])->name('jadwal_periksa.create');
+
+    // Rute untuk menyimpan jadwal periksa baru
+    Route::post('/dokter/jadwal-periksa', [JadwalPeriksaController::class, 'store'])->name('jadwal_periksa.store');
+
+    // Rute untuk menampilkan form mengedit jadwal periksa
+    Route::get('/dokter/jadwal-periksa/{id}/edit', [JadwalPeriksaController::class, 'edit'])->name('jadwal_periksa.edit');
+
+    // Rute untuk memperbarui jadwal periksa
+    Route::post('/dokter/jadwal-periksa/{id}', [JadwalPeriksaController::class, 'update'])->name('jadwal_periksa.update');
+
+    // Rute untuk menghapus jadwal periksa
+    Route::delete('/dokter/jadwal-periksa/{id}', [JadwalPeriksaController::class, 'destroy'])->name('jadwal_periksa.destroy');
     
     Route::post('/dokter/logout', [AuthController::class, 'dokterLogout'])->name('dokter.dokterLogout');
 });
